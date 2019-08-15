@@ -1,72 +1,51 @@
 <template>
   <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        bookmarks
-      </h1>
-      <h2 class="subtitle">
-        Save inspiration or reading list
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
+    <heading />
+    <sidebar />
+    <linklist />
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import Heading from '~/components/Header.vue'
+import Sidebar from '~/components/Sidebar.vue'
+import Linklist from '~/components/LinkList.vue'
 
 export default {
   components: {
-    Logo
-  }
+    Heading,
+    Sidebar,
+    Linklist
+  },
+  mounted() {
+        if(localStorage.getItem('links')) {
+            try{
+                this.links = JSON.parse(localStorage.getItem('links'));
+            } catch(e) {
+                localStorage.removeItem('links');
+            }
+        }
+    }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+
 .container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(12, 70px);
+  grid-gap: 30px;
+  margin: 90px auto;
+
+  @media screen and (max-width: 1200px){
+    width: 960px;
+  }
+  @media screen and (max-width: 1024px){
+    width: 640px;
+  }
+  @media screen and (max-width: 768px){
+    width: 90%;
+  }
 }
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
 </style>

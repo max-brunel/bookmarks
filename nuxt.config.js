@@ -18,7 +18,7 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: { color: '#5EA6E0' },
   /*
   ** Global CSS
   */
@@ -38,7 +38,11 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios'
   ],
+  axios: {
+    //proxyHeaders: false
+  },
   /*
   ** Build configuration
   */

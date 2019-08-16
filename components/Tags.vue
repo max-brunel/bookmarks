@@ -1,0 +1,16 @@
+<template>
+    
+</template>
+
+<style scoped lang='scss'>
+
+$inspiration: #FCBD49;
+$resources: #FC8749;
+$website: #FE6060;
+$app: #FF669B;
+$interaction: #D367DF;
+$dev: #666AFF;
+$social: #389EF7;
+$illustration: #5FCDB4;
+
+</style>

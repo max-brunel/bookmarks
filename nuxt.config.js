@@ -41,7 +41,7 @@ module.exports = {
     '@nuxtjs/axios'
   ],
   axios: {
-    //proxyHeaders: false
+    baseUrl: '/links'
   },
   /*
   ** Build configuration

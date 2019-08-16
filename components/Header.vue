@@ -19,7 +19,6 @@ export default {
   components: {
     Createbookmark
   },
-
   methods: {
     closeDetail: function () {
         this.$refs.addBookmark.removeAttribute("open")
@@ -35,10 +34,18 @@ header{
     justify-content: space-between;
     align-items: center;
 
+    @media screen and (max-width: 768px){
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
     h1 {
         font-size: 4rem;
         font-weight: 100;
         margin: 0;
+        @media screen and (max-width: 768px){
+            margin: 0 0 15px;
+        }
     }
 
     .controls{

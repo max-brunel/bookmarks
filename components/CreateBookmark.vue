@@ -2,7 +2,7 @@
     <div class="modal">
         <h2>New bookmark</h2>
         <form>
-            <input type="url" v-model="link" v-on:keyup.enter="formSubmit" placeholder="Paste URL" >
+            <input type="url" v-model="link" v-on:keyup.enter="formSubmit" placeholder="Paste URL" focus>
             <button class="primary" @click="formSubmit">Submit</button>
         </form>
         <div class="preview" v-if="link">
@@ -22,18 +22,18 @@ export default {
     },
     data () {
         return {
-            link: '',
+            link: null,
             tags: [],
             errors: []
         }
     },
     methods: {
         formSubmit(e) {
+            var passedLink = this.link
             e.preventDefault();
             let currentObj = this;
-            axios.post('http://localhost:3000/links.json', {
-                link: this.link,
-                tags: ['social', 'resources']
+            axios.post('links.json', {
+                link: passedLink
             })
             .then(function (response) {
                 currentObj.output = response.data;

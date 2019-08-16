@@ -23,6 +23,7 @@ export default {
 
   data() {
     return{
+      baseUri: 'http://localhost:3000',
       search: '',
       items: []
     }

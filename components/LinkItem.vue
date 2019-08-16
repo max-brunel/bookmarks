@@ -171,6 +171,9 @@ $illustration: #5FCDB4;
 
         h4{
             margin: 0 0 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         small{

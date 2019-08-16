@@ -34,5 +34,20 @@
         "tags": [
             "resources"
         ]
+    },
+    {
+        "link": "https://googlefonts.github.io/korean",
+        "tags": [
+            "resources",
+            "typography",
+            "interaction"
+        ]
+    },
+    {
+        "link": "https://www.lstore.graphics/paaatterns",
+        "tags": [
+            "resources",
+            "illustration"
+        ]
     }
 ]

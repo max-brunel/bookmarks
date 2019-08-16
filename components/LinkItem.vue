@@ -1,26 +1,39 @@
 <template>
-    <link-prevue :url="address">
-        <template slot-scope="props">
-            <div class="card">
-                <div class='card-img'>
-                    <a target="_blank" v-bind:href="props.url">
-                        <img class="card-img-top" :src="props.img" :alt="props.title" loading="lazy" />
-                        <img class="card-img-shadow" :src="props.img" loading="lazy" />
-                    </a>
+    <transition name='fade'>
+        <link-prevue :url="address">
+            <template slot-scope="props">
+                <div class="card">
+                    <div class='card-img'>
+                        <a target="_blank" v-bind:href="props.url">
+                            <img class="card-img-top" :src="props.img" :alt="props.title" loading="lazy" />
+                            <img class="card-img-shadow" :src="props.img" loading="lazy" />
+                        </a>
+                    </div>
+                    <div class="tags">
+                        <div v-for="tag in tags" :key="tag" :class="tag" :aria-label="tag"></div>
+                    </div>
+                    <div class="card-block">
+                        <a target="_blank" v-bind:href="props.url">
+                            <h4 class="card-title">{{props.title}}</h4>
+                            <small class="card-url">{{props.url}}</small>
+                        </a>
+                        <p class="card-text">{{props.description}}</p>
+                    </div>
                 </div>
-                <div class="tags">
-                    <div v-for="tag in tags" :key="tag" :class="tag" :aria-label="tag"></div>
+            </template>
+
+            <template slot="loading">
+                <div class="card">
+                    <div class="card-img"></div>
+                    <div class="card-block">
+                        <h4></h4>
+                        <small></small>
+                        <p></p>
+                    </div>
                 </div>
-                <div class="card-block">
-                    <a target="_blank" v-bind:href="props.url">
-                        <h4 class="card-title">{{props.title}}</h4>
-                        <small class="card-url">{{props.url}}</small>
-                    </a>
-                    <p class="card-text">{{props.description}}</p>
-                </div>
-            </div>
-        </template>
-    </link-prevue>
+            </template>
+        </link-prevue>
+    </transition>
 </template>
 
 <script>
@@ -33,7 +46,12 @@ export default {
     props: {
         address: String,
         tags: null
-    }
+    },
+    methods: {
+        onClickDescription: function(prevue) {
+        console.log('click', prevue.images, prevue.title, prevue.url, prevue.description)
+        }
+    } 
 }
 </script>
 
@@ -52,6 +70,10 @@ $illustration: #5FCDB4;
     max-width: 270px;
     width: 100%;
 
+    @media screen and (max-width: 1200px){
+        max-width: 100%;
+    }
+
     &:hover{
         .card-img{
             transform: scale(1.05);
@@ -69,7 +91,7 @@ $illustration: #5FCDB4;
         position: relative;
         width: 100%;
         display: block;
-        transition: all .3s cubic-bezier(.75, 0, .5, 1.75);
+        transition: all .3s ease;
 
         img{
             z-index: 1;

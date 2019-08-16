@@ -15,7 +15,6 @@
 <script>
 import LinkItem from './LinkItem'
 import axios from 'axios'
-import {HTTP} from '../.nuxt/http-common'
 
 export default {
     components: {

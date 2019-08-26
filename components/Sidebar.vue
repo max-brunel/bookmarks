@@ -9,14 +9,14 @@
     />
     <form class="tags">
       <h3>Filter by tag</h3>
-      <tags />
+      <tags @change="emitCheckbox" />
     </form>
   </section>
 </template>
 
 <script>
 import axios from "axios";
-import Tags from './Tags'
+import Tags from "./Tags";
 
 export default {
   components: {
@@ -25,7 +25,6 @@ export default {
   data() {
     return {
       search: "",
-      checkboxFilter: [],
       items: [],
       tags: null,
       errors: []
@@ -35,8 +34,8 @@ export default {
     emitSearch: function() {
       this.$emit("searchValue", this.search);
     },
-    emitCheckbox: function() {
-      this.$emit('input', this.checkboxFilter);
+    emitCheckbox: function(values) {
+      this.$emit("filterTags", values);
     }
   },
   computed: {
@@ -64,7 +63,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/tags.scss';
+@import "~/assets/tags.scss";
 
 section {
   grid-column: span 3;
@@ -84,10 +83,10 @@ section {
     margin-bottom: 30px;
   }
 
-  .tags{
+  .tags {
     padding: 0;
 
-    h3{
+    h3 {
       margin-bottom: 15px;
     }
   }

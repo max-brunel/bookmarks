@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <heading />
-    <sidebar v-on:searchValue="onSearch" v-on:checkboxFilter='filterTags'/>
-    <linklist :filter="filterTags" :search="search" />
+    <sidebar v-on:searchValue="onSearch" @filterTags="onFilterTags" />
+    <linklist :items="filterItems" :search="search" />
   </div>
 </template>
 
@@ -24,24 +24,33 @@ export default {
   data() {
     return {
       search: "",
+      filteredTags: [],
       items: []
     };
   },
   methods: {
     onSearch: function(value) {
       this.search = value;
+    },
+    onFilterTags: function(values) {
+      this.filteredTags = values;
     }
   },
   computed: {
     filterItems: function() {
-      return this.items.filter(item => {
+      const itemsFilteredBySearch = this.items.filter(item => {
         return item.link.toLowerCase().indexOf(this.search.toLowerCase()) > -1;
-      })
-    },
-    filterTags: function() {
-      return this.items.filter(item => {
-        return item.tags.indexOf(this.tag) > -1;
-      })
+      });
+      if (this.filteredTags.length) {
+        return itemsFilteredBySearch.filter(i => {
+          const isTagIsInItem = this.filteredTags.reduce((mem, tag) => {
+            return mem || i.tags.indexOf(tag) > -1;
+          }, false);
+          return isTagIsInItem;
+        });
+      } else {
+        return itemsFilteredBySearch;
+      }
     }
   },
   created() {

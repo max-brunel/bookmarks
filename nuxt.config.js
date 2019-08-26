@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 module.exports = {
   mode: 'universal',
   /*
@@ -39,8 +37,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/axios'
   ],
   axios: {
     baseUrl: '/links'
@@ -55,5 +52,4 @@ module.exports = {
     extend (config, ctx) {
     }
   },
-  plugins: ['~/plugins/contentful'],
 }

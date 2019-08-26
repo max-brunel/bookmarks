@@ -3,9 +3,6 @@
     <heading />
     <sidebar v-on:searchValue='onSearch'/>
     <linklist :filter="filterItems" :search='search'/>
-    <li class="contentful" v-for="(post, index) in posts" :key="index">
-      {{post.fields.tags}}
-    </li>
   </div>
 </template>
 
@@ -16,18 +13,7 @@ import Linklist from '~/components/LinkList.vue'
 import LinkPrevue from 'link-prevue'
 import axios from 'axios'
 
-import client from '~/plugins/contentful'
-
 export default {
-  asyncData() {
-    return client.getEntries({
-      content_type: 'post'
-    }).then(entries => {
-      return {
-        posts: entries.items
-      }
-    }).catch(e => console.log(e));
-  },
   components: {
     Heading,
     Sidebar,

@@ -181,6 +181,7 @@ $illustration: #5FCDB4;
         }
 
         p{
+            text-align: left;
             width: 100%;
             margin: 0;
             display: -webkit-box;

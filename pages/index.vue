@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <heading />
-    <sidebar v-on:searchValue="onSearch" />
-    <linklist :filter="filterItems" :search="search" />
+    <sidebar v-on:searchValue="onSearch" v-on:checkboxFilter='filterTags'/>
+    <linklist :filter="filterTags" :search="search" />
   </div>
 </template>
 
@@ -36,7 +36,12 @@ export default {
     filterItems: function() {
       return this.items.filter(item => {
         return item.link.toLowerCase().indexOf(this.search.toLowerCase()) > -1;
-      });
+      })
+    },
+    filterTags: function() {
+      return this.items.filter(item => {
+        return item.tags.indexOf(this.tag) > -1;
+      })
     }
   },
   created() {

@@ -3,7 +3,6 @@
     <h2>New bookmark</h2>
     <form>
       <input type="url" v-model="link" placeholder="Paste URL" />
-      <input type="text" v-model="tags" placeholder="Add tags" />
       <button class="primary" @click="formSubmit">Submit</button>
     </form>
     <div class="preview" v-if="link">

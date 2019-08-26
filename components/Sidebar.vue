@@ -9,18 +9,19 @@
     />
     <form class="tags">
       <h3>Filter by tag</h3>
-      <div class="input" v-for="tag in uniqueTags" :key="tag" :class="tag">
-        <input type="checkbox" :id="tag" :aria-label="tag" v-model='checkboxFilter' :value='tag' @change="emitCheckbox">
-        <label :for="tag">{{tag}}</label>
-      </div>
+      <tags />
     </form>
   </section>
 </template>
 
 <script>
 import axios from "axios";
+import Tags from './Tags'
 
 export default {
+  components: {
+    Tags
+  },
   data() {
     return {
       search: "",
@@ -88,68 +89,6 @@ section {
 
     h3{
       margin-bottom: 15px;
-    }
-
-    .input{
-      position: relative;
-      margin: 15px 0;
-      cursor: pointer;
-      font-size: inherit;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-
-      input{
-        display: none;
-      }
-
-      label{
-        cursor: pointer;
-        position: relative;
-        text-transform: capitalize;
-        font-weight: 600;
-        padding: 5px 10px;
-        border-radius: 99px;
-        transition: all ease .2s;
-
-        &:before{
-          position: absolute;
-          transition: all ease .2s;
-          content: '';
-          display: block;
-          width: 4px;
-          height: 4px;
-          border-radius: 4px;
-          background: #fff;
-          opacity: 0;
-          transform: scale(0);
-          top: 11px;
-          left: 9px;
-        }
-      }
-      @each $name, $color in $tags {
-        &.#{$name}{
-          label{
-            background: lighten($color, 25%);
-            color: desaturate($color, 50%);
-          }
-
-          input:checked ~ label{
-            background: $color;
-            color: #fff;
-            padding-left: 20px;
-          }
-          label:hover{
-            background: lighten($color, 10%);
-            color: white;
-          }
-          input:checked ~label:before{
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-      }
     }
   }
 }

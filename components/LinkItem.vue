@@ -2,6 +2,7 @@
     <transition name='fade'>
         <link-prevue :url="address">
             <template slot-scope="props">
+                <button class="delete primary" @click="deleteItem">Delete</button>
                 <div class="card">
                     <div class='card-img'>
                         <a target="_blank" v-bind:href="props.url">
@@ -38,6 +39,7 @@
 
 <script>
 import LinkPrevue from 'link-prevue'
+import axios from "axios"
 
 export default {
     components: {
@@ -48,10 +50,22 @@ export default {
         tags: null
     },
     methods: {
-        onClickDescription: function(prevue) {
-        console.log('click', prevue.images, prevue.title, prevue.url, prevue.description)
+        deleteItem() {
+            var passedLink = this.link;
+            let currentObj = this;
+            axios
+                .delete("/delete-bookmark", {
+                url: this.address
+                })
+                .then(function(response) {
+                //La réponse c'est le nouveau tableau de bookmarks sans celui que t'as effacé
+                //this.bookmarks = response.data
+                })
+                .catch(function(error) {
+                console.log(error)
+                });
         }
-    } 
+    }
 }
 </script>
 

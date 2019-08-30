@@ -51,4 +51,14 @@ app.post("/create-bookmark", (req, res) => {
   res.send(req.body)
 })
 
+app.delete("/delete-bookmark", (req, res) => {
+  const data = db.getData("/bookmarks")
+  const indexToDelete = data.map(b => b.url).indexOf(req.body.url)
+  if(indexToDelete >=0 ){
+    db.delete(`/bookmarks[${indexToDelete}]`)
+  }
+  const newData = db.getData("/bookmarks")
+  res.send(newData);
+})
+
 start()

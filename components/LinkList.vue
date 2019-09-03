@@ -1,6 +1,6 @@
 <template>
   <section v-if="items.length">
-    <link-item v-for="item in items" :key="item.id" :address="item.link" :tags="item.tags" />
+    <link-item v-for="item in items.slice().reverse()" :key="item.id" :address="item.link" :tags="item.tags" />
   </section>
   <section v-else class="error">
     <h2>No results for {{search}}</h2>

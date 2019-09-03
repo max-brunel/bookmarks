@@ -133,7 +133,7 @@ $illustration: #5FCDB4;
             &.interaction{ background: $interaction; }
             &.dev{ background: $dev; }
             &.social{ background: $social; }
-            &.interaction{ background: $interaction; }
+            &.illustration{ background: $illustration; }
 
             &:after{
                 position: absolute;

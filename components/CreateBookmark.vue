@@ -46,7 +46,8 @@ export default {
       axios
         .post("/create-bookmark", {
           link: passedLink,
-          tags: passedTags
+          tags: passedTags,
+          date: new Date()
         })
         .then(function(response) {
           currentObj.output = response.data;

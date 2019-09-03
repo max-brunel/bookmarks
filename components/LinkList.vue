@@ -1,10 +1,10 @@
 <template>
-  <section v-if="items.length">
-    <link-item v-for="item in items.slice().reverse()" :key="item.id" :address="item.link" :tags="item.tags" />
-  </section>
-  <section v-else class="error">
-    <h2>No results for {{search}}</h2>
-  </section>
+    <transition-group name="list" tag="section" v-if="items.length">
+      <link-item v-for="item in items.slice().reverse()" :key="item.date" :address="item.link" :tags="item.tags" />
+    </transition-group>
+    <section v-else class="error">
+      <h2>No results for {{search}}</h2>
+    </section>
 </template>
 
 <script>
@@ -61,6 +61,16 @@ section {
       font-size: 5rem;
       color: #e0e7ec;
     }
+  }
+
+  .list-item {
+    display: inline;
+  }
+  .list-enter-active, .list-leave-active, .list-move {
+    transition: all .4s ease;
+  }
+  .list-enter, .list-leave-to {
+    opacity: 0;
   }
 }
 </style>

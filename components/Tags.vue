@@ -56,17 +56,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$tags: (
-  "inspiration": #fcbd49,
-  "resources": #fc8749,
-  "website": #fe6060,
-  "app": #ff669b,
-  "interaction": #d367df,
-  "dev": #666aff,
-  "social": #389ef7,
-  "illustration": #5fcdb4,
-  "typography": #AAA
-);
+@import './tags';
 
 input {
   width: 100%;

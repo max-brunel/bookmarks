@@ -39,7 +39,6 @@
 <script>
 import LinkPrevue from 'link-prevue'
 import axios from "axios"
-
 export default {
     components: {
         LinkPrevue
@@ -52,15 +51,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-$inspiration: #FCBD49;
-$resources: #FC8749;
-$website: #FE6060;
-$app: #FF669B;
-$interaction: #D367DF;
-$dev: #666AFF;
-$social: #389EF7;
-$illustration: #5FCDB4;
+@import './tags';
 
 .card{
     max-width: 270px;
@@ -126,34 +117,31 @@ $illustration: #5FCDB4;
             height: 10px;
             border-radius: 10px;
             box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
-            &.inspiration{ background: $inspiration; }
-            &.resources{ background: $resources; }
-            &.website{ background: $website; }
-            &.app{ background: $app; }
-            &.interaction{ background: $interaction; }
-            &.dev{ background: $dev; }
-            &.social{ background: $social; }
-            &.illustration{ background: $illustration; }
+            @each $name, $color in $tags {
+                &.#{$name} {
+                    background: $color;
 
-            &:after{
-                position: absolute;
-                content: attr(aria-label);
-                z-index: 2;
-                transition: all ease .2s;
-                pointer-events: none;
-                bottom: 15px;
-                background: #F0F7FC;
-                box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
-                text-transform: capitalize;
-                font-size: .8rem;
-                line-height: 1rem;
-                font-weight: 600;
-                color: #5EA6E0;
-                padding: 5px 10px;
-                border-radius: 3px;
-                left: 50%;
-                transform: translateX(-50%);
-                opacity: 0;
+                    &:after{
+                        position: absolute;
+                        content: attr(aria-label);
+                        z-index: 2;
+                        transition: all ease .2s;
+                        pointer-events: none;
+                        bottom: 15px;
+                        box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+                        text-transform: capitalize;
+                        font-size: .8rem;
+                        line-height: 1rem;
+                        font-weight: 600;
+                        background: $color;
+                        color: white;
+                        padding: 5px 10px;
+                        border-radius: 3px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        opacity: 0;
+                    }
+                }
             }
 
             &:hover:after{

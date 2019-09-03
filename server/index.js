@@ -46,8 +46,17 @@ app.get("/bookmarks", (req, res) => {
   res.send(db.getData("/bookmarks"))
 })
 
+app.get("/tags", (req, res) => {
+  res.send(db.getData("/tags"))
+})
+
 app.post("/create-bookmark", (req, res) => {
   db.push("/bookmarks[]", req.body, true)
+  res.send(req.body)
+})
+
+app.post("/create-tag", (req, res) => {
+  db.push("/tags[]", req.body, true)
   res.send(req.body)
 })
 

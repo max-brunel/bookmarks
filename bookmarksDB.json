@@ -1,8 +1,59 @@
 {
     "bookmarks": [
         {
-            "link": "http:/revealstudio.co",
-            "tags": []
+            "link": "http://aristidebenoist.com",
+            "tags": [
+                "inspiration",
+                "website",
+                "interaction",
+                "dev"
+            ]
+        },
+        {
+            "link": "https://sonder.com",
+            "tags": [
+                "website",
+                "app",
+                "inspiration",
+                "resources"
+            ]
+        },
+        {
+            "link": "http://valentingautier.com",
+            "tags": [
+                "website",
+                "inspiration",
+                "interaction"
+            ]
+        }
+    ],
+    "tags": [
+        {
+            "tag": "inspiration"
+        },
+        {
+            "tag": "resources"
+        },
+        {
+            "tag": "website"
+        },
+        {
+            "tag": "app"
+        },
+        {
+            "tag": "interaction"
+        },
+        {
+            "tag": "dev"
+        },
+        {
+            "tag": "social"
+        },
+        {
+            "tag": "illustration"
+        },
+        {
+            "tag": "typography"
         }
     ]
 }

@@ -7,7 +7,13 @@
     </form>
     <div class="preview" v-if="link">
       <h3>Preview</h3>
-      <link-item :address="link" />
+      <div class="content">
+        <link-item :address="link" />
+        <div class="tags">
+          <h3>Tags</h3>
+          <tags @change="onTags"/>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -15,14 +21,18 @@
 <script>
 import LinkItem from "./LinkItem";
 import axios from "axios";
+import Tags from "./Tags"
 
 export default {
   components: {
-    LinkItem
+    LinkItem,
+    Tags
   },
   data() {
     return {
       link: null,
+      tag: null,
+      checkedTags: [],
       tags: [],
       errors: []
     };
@@ -30,12 +40,13 @@ export default {
   methods: {
     formSubmit(e) {
       var passedLink = this.link;
+      var passedTags = this.checkedTags
       e.preventDefault();
       let currentObj = this;
       axios
         .post("/create-bookmark", {
           link: passedLink,
-          tags: []
+          tags: passedTags
         })
         .then(function(response) {
           currentObj.output = response.data;
@@ -43,6 +54,9 @@ export default {
         .catch(function(error) {
           currentObj.output = error;
         });
+    },
+    onTags: function(values) {
+      this.checkedTags = values;
     }
   }
 };
@@ -83,10 +97,17 @@ export default {
   }
 
   .preview {
-    width: fit-content;
-    padding: 15px;
-    box-shadow: 0 12px 24px 0 rgba(95, 128, 155, 0.2);
-    border-radius: 8px;
+
+    .content{
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      .tags{
+        flex-grow: 1;
+        margin: 0 0 0 30px;
+      }
+    }
 
     h3 {
       margin: 0 0 15px;

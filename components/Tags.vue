@@ -35,7 +35,7 @@ export default {
     uniqueTags: function() {
       return this.items
         .flatMap((item, index) => {
-          return item.tags;
+          return item.tag;
         })
         .filter((tag, index, self) => {
           return self.indexOf(tag) === index;
@@ -44,7 +44,7 @@ export default {
   },
   created() {
     axios
-      .get("/bookmarks")
+      .get("/tags")
       .then(response => {
         this.items = response.data;
       })
@@ -64,7 +64,8 @@ $tags: (
   "interaction": #d367df,
   "dev": #666aff,
   "social": #389ef7,
-  "illustration": #5fcdb4
+  "illustration": #5fcdb4,
+  "typography": #AAA
 );
 
 input {

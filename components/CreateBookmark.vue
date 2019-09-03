@@ -54,6 +54,7 @@ export default {
         .catch(function(error) {
           currentObj.output = error;
         });
+        window.location.reload(true)
     },
     onTags: function(values) {
       this.checkedTags = values;

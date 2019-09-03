@@ -44,8 +44,8 @@ export default {
       if (this.filteredTags.length) {
         return itemsFilteredBySearch.filter(i => {
           const isTagIsInItem = this.filteredTags.reduce((mem, tag) => {
-            return mem || i.tags.indexOf(tag) > -1;
-          }, false);
+            return mem && i.tags.indexOf(tag) > -1;
+          }, true);
           return isTagIsInItem;
         });
       } else {

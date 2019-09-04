@@ -2,7 +2,7 @@
   <div class="container">
     <heading />
     <sidebar v-on:searchValue="onSearch" @filterTags="onFilterTags" />
-    <linklist :items="filterItems" :search="search" />
+    <linklist :items="filterItems" :search="search" :isEdit="manage" />
   </div>
 </template>
 
@@ -25,7 +25,8 @@ export default {
     return {
       search: "",
       filteredTags: [],
-      items: []
+      items: [],
+      manage: Boolean
     };
   },
   methods: {
@@ -51,6 +52,9 @@ export default {
       } else {
         return itemsFilteredBySearch;
       }
+    },
+    manageBookmarks: function() {
+      return this.isManage
     }
   },
   created() {

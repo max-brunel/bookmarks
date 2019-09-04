@@ -3,6 +3,7 @@
         <link-prevue :url="address">
             <template slot-scope="props">
                 <div class="card">
+                    <div class="edit" v-if="isEdit" @click="isDeleted">Delete</div>
                     <div class='card-img'>
                         <a target="_blank" v-bind:href="props.url">
                             <img class="card-img-top" :src="props.img" :alt="props.title" loading="lazy" />
@@ -23,7 +24,7 @@
             </template>
 
             <template slot="loading">
-                <div class="card">
+                <div class="card card-loading">
                     <div class="card-img"></div>
                     <div class="card-block">
                         <h4></h4>
@@ -45,7 +46,9 @@ export default {
     },
     props: {
         address: String,
-        tags: null
+        isEdit: false,
+        tags: null,
+        isDeleted: ''
     }
 }
 </script>
@@ -56,6 +59,7 @@ export default {
 .card{
     max-width: 270px;
     width: 100%;
+    position: relative;
 
     @media screen and (max-width: 1200px){
         max-width: 100%;
@@ -174,6 +178,60 @@ export default {
             overflow: hidden;
         }
     }
+
+    .edit{
+        cursor: pointer;
+        z-index: 9;
+        position: absolute;
+        right: -10px;
+        top: -10px;
+        background: #5EA6E0;
+        filter: hue-rotate(145deg);
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-weight: 700;
+        color: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+    }
+}
+
+.card-loading{
+    *{
+        background: linear-gradient(to right, #F0F7FC 8%, #ecf3f7 18%, #F0F7FC 33%);
+        background-size: 810px;
+        animation: loading 1s infinite linear;
+    }
+    .card-img{
+        width: 100%;
+        height: 180px;
+        border-radius: 10px;
+    }
+
+    .card-block{
+        background: transparent;
+        h4{
+            width: 75%;
+            height: 19px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        small{
+            width: 66%;
+            height: 6px;
+            display: block;
+        }
+
+        p{
+            width: 100%;
+            height: 9px;
+            display: block;
+        }
+    }
+}
+
+@keyframes loading {
+    from{background-position: -270px 0;}
+    to{background-position: 270px 0;}
 }
 
 </style>

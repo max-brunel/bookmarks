@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <heading />
-    <sidebar v-on:searchValue="onSearch" @filterTags="onFilterTags" />
+    <heading v-on:manage="onManage"/>
+    <sidebar v-on:searchValue="onSearch" @filterTags="onFilterTags"/>
     <linklist :items="filterItems" :search="search" :isEdit="manage" @change="refreshLinkList()" />
   </div>
 </template>
@@ -26,7 +26,7 @@ export default {
       search: "",
       filteredTags: [],
       items: [],
-      manage: Boolean
+      manage: false
     };
   },
   methods: {
@@ -35,6 +35,9 @@ export default {
     },
     onFilterTags: function(values) {
       this.filteredTags = values;
+    },
+    onManage: function(value) {
+      this.manage = value;
     },
     refreshLinkList: function() {
       axios
@@ -62,9 +65,6 @@ export default {
       } else {
         return itemsFilteredBySearch;
       }
-    },
-    manageBookmarks: function() {
-      return this.isManage;
     }
   },
   created() {

@@ -2,7 +2,7 @@
   <transition name="fade">
     <link-prevue :url="address">
       <template slot-scope="props">
-        <div class="card">
+        <div class="card" :class="{edit : isEdit}">
           <div class="edit" v-if="isEdit" @click="onClickDelete()">Delete</div>
           <div class="card-img">
             <a target="_blank" v-bind:href="props.url">
@@ -196,6 +196,10 @@ export default {
     color: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
+
+  &.edit .card-img{
+      animation: edit .3s infinite linear;
+  }
 }
 
 .card-loading {
@@ -239,5 +243,17 @@ export default {
   to {
     background-position: 270px 0;
   }
+}
+
+@keyframes edit {
+    0%{
+        transform: rotate(-1deg);
+    }
+    50%{
+        transform: rotate(1deg);
+    }
+    100%{
+        transform: rotate(-1deg);
+    }
 }
 </style>

@@ -2,7 +2,7 @@
     <header>
         <h1>Bookmarks</h1>
         <div class="controls">
-            <button class="secondary manage">Manage</button>
+            <button class="secondary manage" @click="toggleEdit">Manage</button>
             <details ref='addBookmark'>
                 <summary class="primary newBookmark">New bookmark</summary>
                 <div class="overlay" v-on:click="closeDetail()" @keydown.esc="closeDetail()"></div>
@@ -19,9 +19,18 @@ export default {
   components: {
     Createbookmark
   },
+  data() {
+      return{
+          isEdit: false
+      }
+  },
   methods: {
     closeDetail: function () {
         this.$refs.addBookmark.removeAttribute("open")
+    },
+    toggleEdit: function() {
+        this.isEdit = !this.isEdit
+        this.$emit("manage", this.isEdit)
     }
 }
 }

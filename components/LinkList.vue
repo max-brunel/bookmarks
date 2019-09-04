@@ -1,9 +1,9 @@
 <template>
     <transition-group name="list" tag="section" v-if="items.length">
-      <link-item v-for="item in items.slice().reverse()" :key="item.date" :address="item.link" :tags="item.tags" />
+      <link-item v-for="item in items.slice().reverse()" :key="item.date" :address="item.link" :tags="item.tags" :isEdit="isEdit" :isDeleted='deleteBookmark' />
     </transition-group>
     <section v-else class="error">
-      <h2>No results for {{search}}</h2>
+      <h2>No result for {{search}}</h2>
     </section>
 </template>
 
@@ -17,7 +17,22 @@ export default {
   },
   props: {
     items: { type: [Array, Number], required: true },
-    search: ""
+    search: "",
+    isEdit: false
+  },
+  methods: {
+    deleteBookmark: function() {
+            axios
+                .delete('/delete-bookmark', {
+                    link: this.item.link
+                })
+                .then(function(response) {
+                    this.bookmarks = response.data
+                })
+                .catch(function(error) {
+                    console.log(error)
+                });
+        }
   }
 };
 </script>

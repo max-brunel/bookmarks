@@ -64,30 +64,17 @@ app.delete("/delete-bookmark", (req, res) => {
   const data = db.getData("/bookmarks")
   if (!req.query.url) {
     res.status(400).send("Url param is not defined")
+    return
   }
   const indexToDelete = data.map(b => b.link).indexOf(req.query.url)
   if (indexToDelete < 0) {
     res.status(404).send("Bookmark not found")
+    return
   } else {
     db.delete(`/bookmarks[${indexToDelete}]`)
     const newData = db.getData("/bookmarks")
     res.send(newData)
   }
 })
-
-// To put in vue component
-// function deleteBookmark(url) {
-//   axios
-//     .delete("/delete-bookmark", {
-//       params: { url: url }
-//     })
-//     .then(response => {
-//       //Response.data is the new array without the deleted one
-//       this.items = response.data
-//     })
-//     .catch(e => {
-//       this.errors.push(e)
-//     })
-// }
 
 start()

@@ -2,7 +2,7 @@
   <div class="container">
     <heading />
     <sidebar v-on:searchValue="onSearch" @filterTags="onFilterTags" />
-    <linklist :items="filterItems" :search="search" :isEdit="manage" />
+    <linklist :items="filterItems" :search="search" :isEdit="manage" @change="refreshLinkList()" />
   </div>
 </template>
 
@@ -35,6 +35,16 @@ export default {
     },
     onFilterTags: function(values) {
       this.filteredTags = values;
+    },
+    refreshLinkList: function() {
+      axios
+        .get("/bookmarks")
+        .then(response => {
+          this.items = response.data;
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
     }
   },
   computed: {
@@ -54,18 +64,11 @@ export default {
       }
     },
     manageBookmarks: function() {
-      return this.isManage
+      return this.isManage;
     }
   },
   created() {
-    axios
-      .get("/bookmarks")
-      .then(response => {
-        this.items = response.data;
-      })
-      .catch(e => {
-        this.errors.push(e);
-      });
+    this.refreshLinkList();
   },
   mounted() {
     if (localStorage.getItem("links")) {

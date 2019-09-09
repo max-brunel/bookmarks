@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="tag-list">
     <div class="input" v-for="tag in uniqueTags" :key="tag" :class="tag">
       <input
         type="checkbox"
@@ -112,7 +112,7 @@ input {
       &.#{$name} {
         label {
           background: lighten($color, 25%);
-          color: desaturate($color, 50%);
+          color: desaturate(darken($color, 20%), 40%);
         }
 
         input:checked ~ label {

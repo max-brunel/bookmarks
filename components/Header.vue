@@ -1,14 +1,19 @@
 <template>
     <header>
         <h1>Bookmarks</h1>
-        <div class="controls">
-            <button class="secondary manage" @click="toggleEdit">Manage</button>
-            <details ref='addBookmark'>
+        <transition-group tag="div" name="edit" class="controls">
+            <button v-if="!isEdit" key='edit' class="secondary manage" @click="toggleEdit">
+                Manage
+            </button>
+            <button v-else key='edit' class="secondary manage" @click="toggleEdit">
+                Done
+            </button>
+            <details key='add' ref='addBookmark' v-if="!isEdit">
                 <summary class="primary newBookmark">New bookmark</summary>
                 <div class="overlay" v-on:click="closeDetail()" @keydown.esc="closeDetail()"></div>
                 <createbookmark />
             </details>
-        </div>
+        </transition-group>
     </header>
 </template>
 
@@ -76,5 +81,18 @@ header{
         }
     }
 }
+
+.edit-item {
+    display: inline;
+  }
+  .edit-enter-active,
+  .edit-leave-active,
+  .edit-move {
+    transition: all 0.4s ease;
+  }
+  .edit-enter,
+  .edit-leave-to {
+    opacity: 0;
+  }
 
 </style>

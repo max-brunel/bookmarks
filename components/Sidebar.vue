@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="sidebar">
     <input
       type="text"
       autocomplete="false"
@@ -62,10 +62,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "~/assets/tags.scss";
 
-section {
+#sidebar {
   grid-column: span 3;
 
   @media screen and (max-width: 1200px) {
@@ -78,17 +78,50 @@ section {
     grid-column: span 12;
   }
 
-  input {
+  input[type="text"] {
     width: 100%;
     margin-bottom: 30px;
   }
 
   .tags {
     padding: 0;
+    @media screen and (max-width: 1024px) {
+      position: relative;
+      &:before, &:after{
+          z-index: 1;
+          height: 45px;
+          width: 15px;
+          background: red;
+          position: absolute;
+          bottom: 0;
+          content: '';
+          background: linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,0));
+        }
+
+        &:before{ left: 0px; }
+        &:after{ right: 0px; transform: rotate(180deg);}
+
+      .tag-list{
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        display: flex;
+        position: relative;
+        padding: 0 15px;
+        ::-webkit-scrollbar {
+          width: 0px;
+          background: transparent;
+        }
+
+        .input{
+          margin: 15px 10px 15px 0;
+        }
+      }
+    }
 
     h3 {
       margin-bottom: 15px;
     }
+
   }
 }
 </style>
